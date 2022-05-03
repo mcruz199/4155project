@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SoftwareDevProject</string>
+    <string name="mapbox_access_token">
+        pk.eyJ1IjoibWFjcnV6NTciLCJhIjoiY2wyY3VqNDhtMDRocDNpanpmcTRuOGc2eSJ9.OOLMGN5bKkZLitFrL0x3xA</string>
+</resources>
