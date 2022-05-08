@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         buildingClickable = findViewById(R.id.layoutBuilding);
         phoneClickable = findViewById(R.id.layoutPhones);
         stopClickable = findViewById(R.id.layoutStops);
+        foodClickable = findViewById(R.id.layoutFood);
         test = findViewById(R.id.textHello);
         fusedLocClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //on click, change activity
         buildingClickable.setOnClickListener(v -> openBuildingSearch());
         stopClickable.setOnClickListener(v -> openStopSearch());
+        foodClickable.setOnClickListener(v -> openFoodSearch());
 
 
         phoneClickable.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    //opens the food search activity
+    public void openFoodSearch() {
+        Intent intent = new Intent(this, Activity4.class);
+        startActivity(intent);
+    }
 
 }

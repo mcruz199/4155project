@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SoftwareDevProject">
         <activity
-            android:name=".Activity5"
-            android:exported="false" />
-        <activity
             android:name=".Activity4"
             android:exported="false" />
         <activity
