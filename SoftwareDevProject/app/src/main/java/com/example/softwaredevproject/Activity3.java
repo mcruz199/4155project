@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 public class Activity3 extends AppCompatActivity{
-    private String[] buildingNameList = {
+    private String[] stopNameList = {
             "Gold Route", "Green Route", "Silver Route"
     };
 
@@ -32,7 +32,7 @@ public class Activity3 extends AppCompatActivity{
             "35.308664841379915, -80.73366310800392", "35.30513019821512, -80.73040272689924", "35.307576666820566, -80.7355821299574"
     };
 
-    public ArrayList<Place> bList = createStopList(buildingNameList);
+    public ArrayList<Place> bList = createStopList(stopNameList);
     private ArrayAdapter<String> listViewAdapter;
     private AppAdapter appAdapter;
     RelativeLayout card;
@@ -40,7 +40,7 @@ public class Activity3 extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.activity_3);
 
         View inflatedView = getLayoutInflater().inflate(R.layout.list_item, null);
         card = (RelativeLayout)inflatedView.findViewById(R.id.cardSpace);
@@ -53,15 +53,15 @@ public class Activity3 extends AppCompatActivity{
     //creates a list of Place objects using stop names array
     //coordinates are set to null so that we may replace them with the nearest stop
     public static ArrayList<Place> createStopList(String[] nameList) {
-        ArrayList<Place> places = new ArrayList<Place>();
+        ArrayList<Place> stops = new ArrayList<Place>();
         for (int i = 0; i < nameList.length; i++) {
-            places.add(new Place(R.drawable.ic_place, nameList[i], null));
+            stops.add(new Place(R.drawable.ic_place, nameList[i], null));
         }
-        return places;
+        return stops;
     }
 
     private void buildRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.placeRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.stopRecyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         appAdapter = new AppAdapter(bList);

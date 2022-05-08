@@ -66,6 +66,7 @@ public class Navigation extends AppCompatActivity {
             String line = reader.readLine();
 
             while (line != null) {
+                System.out.println(line);
                 coordList.add(line);
                 line = reader.readLine();
             }
@@ -76,7 +77,7 @@ public class Navigation extends AppCompatActivity {
         return coordList;
     }
 
-    public void beginNav(double lat, double lon, List<String> coords) {
+    public void beginProximityNav(double lat, double lon, List<String> coords) {
         float[] result = new float[1];
         double currentEPhoneLat;
         double currentEPhoneLon;
@@ -139,11 +140,12 @@ public class Navigation extends AppCompatActivity {
                                         System.out.println(String.valueOf(userLong));
 
                                         //call method to compare all phone coordinate sets and choose the nearest one for navigation
-                                        navManager.beginNav(userLat, userLong, placeCoordinates);
+                                        navManager.beginProximityNav(userLat, userLong, placeCoordinates);
                                     }
                                 }
                             }, Looper.getMainLooper());
                 } else {
+                    System.out.println("isEnable false");
                     //check if device location is enabled or not
                     LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                             .addLocationRequest(locRequest); //adds one LocationRequest that the client is interested in

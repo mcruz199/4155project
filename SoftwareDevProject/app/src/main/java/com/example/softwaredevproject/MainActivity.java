@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         buildingClickable = findViewById(R.id.layoutBuilding);
         phoneClickable = findViewById(R.id.layoutPhones);
         stopClickable = findViewById(R.id.layoutStops);
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         phoneCoords = navManager.readFile(ePhoneTextFileName);
-        System.out.println(phoneCoords);
 
         //on click, change activity
         buildingClickable.setOnClickListener(v -> openBuildingSearch());
@@ -100,5 +100,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity3.class);
         startActivity(intent);
     }
+
+
 
 }
