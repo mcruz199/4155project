@@ -1,12 +1,11 @@
 package com.example.softwaredevproject;
 
-import java.util.ArrayList;
-
 //place class
 public class Place {
     private int icon;
     private String name;
     private String coords;
+    private int type;
 
     //constructor for place class
     public Place(int imageResource, String pName, String latAndLon) {
@@ -26,8 +25,11 @@ public class Place {
     }
 
     //coordinateGetter
-
     public String getCoordinates() {
         return coords;
+    }
+
+    public void setCoords(String latAndLon) {
+        this.coords = latAndLon;
     }
 }

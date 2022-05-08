@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +47,8 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.appViewHolder> {
                 for (Place building : placeList) {
                     if (building.getName().toLowerCase().contains(text.toLowerCase())) {
                         destinationCoords = building.getCoordinates();
+                    } else if (building.getName().toLowerCase().contains("Silver Route")) {
+
                     }
                 }
 
@@ -84,4 +85,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.appViewHolder> {
     public int getItemCount() {
         return placeList.size();
     }
+
+
 }

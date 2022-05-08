@@ -82,10 +82,11 @@ public class Activity2 extends AppCompatActivity{
     }
 
 
+
+
     //creates a list of Place objects using building names array
     public static ArrayList<Place> createPlaceList(String[] nameList, String[] coordList) {
         ArrayList<Place> places = new ArrayList<Place>();
-
         for (int i = 0; i < nameList.length; i++) {
             places.add(new Place(R.drawable.ic_place, nameList[i], coordList[i]));
         }
