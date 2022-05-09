@@ -1,5 +1,6 @@
 # 4155project
 Team 3's Project for  ITSC-4155-051 NinerWalks
+
 NinerWalks is an Android app that provides directions to the various locations at the University of North Carolina at Charlotte
 
 How to run:
