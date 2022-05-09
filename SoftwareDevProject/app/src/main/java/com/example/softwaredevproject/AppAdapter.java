@@ -108,7 +108,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.appViewHolder> {
                                     //isEnabled true or false depending on whether or not GPS is turned on
                                     isEnabled = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
                                     navManager.permissionsProtocol(locRequest, locManager, stopCoords, navManager, isEnabled);
-                                    System.out.println(stopCoords);
 
                                 }
                             }

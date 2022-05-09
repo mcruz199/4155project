@@ -53,6 +53,9 @@ public class Navigation extends AppCompatActivity {
     public Activity getAct() {
         return act;
     }
+    public Context getCon() {
+        return con;
+    }
 
 
     public List<String> readFile(String fileName) {
@@ -154,7 +157,7 @@ public class Navigation extends AppCompatActivity {
                     builder.setAlwaysShow(true);
 
                     //task
-                    Task<LocationSettingsResponse> task = LocationServices.getSettingsClient(getApplicationContext())
+                    Task<LocationSettingsResponse> task = LocationServices.getSettingsClient(navManager.getCon().getApplicationContext())
                             .checkLocationSettings(builder.build());
 
                     task.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {

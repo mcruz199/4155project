@@ -22,11 +22,17 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    LocationRequest locRequest;
+
+    LocationRequest locRequest = LocationRequest.create()
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setInterval(3000) //3000 milliseconds
+            .setFastestInterval(1000); //1000 milliseconds
+
+    LocationManager locManager = null;
+    boolean isEnabled = false;
     FusedLocationProviderClient fusedLocClient;
-    List<String> phoneCoords = new ArrayList<String>();
-    Navigation navManager = new Navigation(MainActivity.this, this);
     private static String ePhoneTextFileName = "emergencyphonecoordinates";
+
 
     LinearLayout buildingClickable;
     LinearLayout phoneClickable;
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Navigation navManager = new Navigation(this, this);
+        List<String> phoneCoords = phoneCoords = navManager.readFile(ePhoneTextFileName);
 
 
         buildingClickable = findViewById(R.id.layoutBuilding);
@@ -50,41 +58,32 @@ public class MainActivity extends AppCompatActivity {
 
         phoneCoords = navManager.readFile(ePhoneTextFileName);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locManager = (LocationManager) getSystemService(MainActivity.this.LOCATION_SERVICE);
+                //isEnabled true or false depending on whether or not GPS is turned on
+                isEnabled = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+
         //on click, change activity
         buildingClickable.setOnClickListener(v -> openBuildingSearch());
         stopClickable.setOnClickListener(v -> openStopSearch());
         foodClickable.setOnClickListener(v -> openFoodSearch());
 
 
+        List<String> finalPhoneCoords = phoneCoords;
         phoneClickable.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                locRequest = LocationRequest.create()
-                        .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                        .setInterval(3000) //3000 milliseconds
-                        .setFastestInterval(1000); //1000 milliseconds
-
-                //initialize locManager
-                LocationManager locManager;
-
-                //ensures device has API level 23 or more, which allows for the use of methods like requestPermissions
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        locManager = null;
-                        boolean isEnabled = false;
-
-                        //initialize locManager
-
-                        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                        //isEnabled true or false depending on whether or not GPS is turned on
-                        isEnabled = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                        navManager.permissionsProtocol(locRequest, locManager, phoneCoords, navManager, isEnabled);
-
-                    } else {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                    }
+                if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    locManager = (LocationManager) getSystemService(MainActivity.this.LOCATION_SERVICE);
+                    isEnabled = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    navManager.permissionsProtocol(locRequest, locManager, finalPhoneCoords, navManager, isEnabled);
                 }
             }
         });
