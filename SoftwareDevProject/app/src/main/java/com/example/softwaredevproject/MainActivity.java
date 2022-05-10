@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout phoneClickable;
     LinearLayout foodClickable;
     LinearLayout stopClickable;
+    LinearLayout amenityClickable;
+    LinearLayout reviewClickable;
+    LinearLayout favoriteClickable;
+    LinearLayout dormClickable;
     TextView test;
 
     @Override
@@ -52,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         phoneClickable = findViewById(R.id.layoutPhones);
         stopClickable = findViewById(R.id.layoutStops);
         foodClickable = findViewById(R.id.layoutFood);
+        amenityClickable = findViewById(R.id.layoutAmenity);
+        reviewClickable = findViewById(R.id.layoutReview);
+        favoriteClickable = findViewById(R.id.layoutFavorite);
+        dormClickable = findViewById(R.id.layoutDorm);
+
         test = findViewById(R.id.textHello);
         fusedLocClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -73,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         buildingClickable.setOnClickListener(v -> openBuildingSearch());
         stopClickable.setOnClickListener(v -> openStopSearch());
         foodClickable.setOnClickListener(v -> openFoodSearch());
+        favoriteClickable.setOnClickListener(v -> openFavoriteList());
+        amenityClickable.setOnClickListener(v -> openAmenitySearch());
+        reviewClickable.setOnClickListener(v -> openLeaveReview());
+        dormClickable.setOnClickListener(v -> openDormList());
 
 
         List<String> finalPhoneCoords = phoneCoords;
@@ -105,6 +120,30 @@ public class MainActivity extends AppCompatActivity {
     //opens the food search activity
     public void openFoodSearch() {
         Intent intent = new Intent(this, Activity4.class);
+        startActivity(intent);
+    }
+
+    //opens the amenity search activity
+    public void openAmenitySearch() {
+        Intent intent = new Intent(this, Activity5.class);
+        startActivity(intent);
+    }
+
+    //opens the review form
+    public void openLeaveReview() {
+        Uri uri = Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSfy-o69RyJc3l1NZmUqiLE2mjDE6JrvniaxA3wR4Vz4E-PQHQ/viewform?usp=sf_link"); // missing 'http://' will cause crashed
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    //opens the favorites list
+    public void openFavoriteList() {
+        Intent intent = new Intent(this, Activity6.class);
+        startActivity(intent);
+    }
+
+    //opens the dorms list
+    public void openDormList() {
+        Intent intent = new Intent(this, Activity8.class);
         startActivity(intent);
     }
 
