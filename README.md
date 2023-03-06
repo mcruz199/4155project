@@ -9,3 +9,5 @@ How to run:
 3. When selecting which application to run, make sure you select the folder titled "SoftwareDevProject"
 ![72f11cda6d3b392e244234dd7fc8acde](https://user-images.githubusercontent.com/78057224/167338061-9e8a3724-5b9f-4b44-9b76-05bd9b5c052d.png)
 4. If not already set up, install an emulator through the Android Studio platform.
+
+https://www.youtube.com/watch?v=kE6adpaKbo8
